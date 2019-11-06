@@ -20,7 +20,7 @@ setup(
    long_description_content_type='text/markdown', 
    author='Jon',
    author_email='jonrobinson@hotmail.com',
-   py_modules=['wav_obj_importer', 'geometry_tools', '_config'],  #same as name
+   py_modules=['dash-obj-in-3dmesh.wav_obj_importer', 'dash-obj-in-3dmesh.geometry_tools', 'dash-obj-in-3dmesh._config'],  #same as name
    python_requires='>=3.5',
    install_requires=[
        'numpy', 
