@@ -16,13 +16,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
    name='dash_obj_in_3dmesh',
-   version='0.1dev',
+   version='0.1.dev',
    description='Some tools for getting Wavefront OBJ files into a dash 3dmesh graph',
    long_description=open('README.md').read(),
    long_description_content_type='text/markdown', 
    author='Jon Robinson',
    author_email='jonrobinson@hotmail.com',
-   py_modules=['dash_obj_in_3dmesh.wav_obj_importer', 'dash_obj_in_3dmesh.geometry_tools', 'dash-obj-in-3dmesh._config'],  #same as name
+   py_modules=['dash_obj_in_3dmesh.wav_obj_importer', 'dash_obj_in_3dmesh.geometry_tools', 'dash_obj_in_3dmesh._config'],  #same as name
    python_requires='>=3.5',
    install_requires=[
        'numpy', 
