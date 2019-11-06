@@ -10,8 +10,8 @@
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>dash-obj-in-3dmesh</Name>
-    <RootNamespace>dash-obj-in-3dmesh</RootNamespace>
+    <Name>dash_obj_in_3dmesh</Name>
+    <RootNamespace>dash_obj_in_3dmesh</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
