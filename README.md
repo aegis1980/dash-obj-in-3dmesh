@@ -1,4 +1,4 @@
-Import a Wavefront OBJ file into a plot.ly Dash 3dMesh
+Import a Wavefront OBJ file into a plot.ly Dash 3dMesh graph:
 
 ```
 pip install git+https://github.com/aegis1980/dash-obj-in-3dmesh.git
