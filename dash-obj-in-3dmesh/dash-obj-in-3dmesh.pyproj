@@ -38,7 +38,6 @@
     <Compile Include="runme.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="setup.py" />
     <Compile Include="wav_obj.py">
       <SubType>Code</SubType>
     </Compile>
@@ -58,8 +57,6 @@
     <Content Include="assets\my_style.css" />
     <Content Include="data\obj\test.mtl" />
     <Content Include="data\obj\test.obj" />
-    <Content Include="LICENSE.md" />
-    <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
