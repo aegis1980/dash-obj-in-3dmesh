@@ -15,7 +15,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-   name='dash-obj-in-3dmesh',
+   name='dash_obj_in_3dmesh',
    version='0.1dev',
    description='Some tools for getting Wavefront OBJ files into a dash 3dmesh graph',
    long_description=open('README.md').read(),
