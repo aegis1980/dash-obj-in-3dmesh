@@ -20,7 +20,7 @@ setup(
    description='Some tools for getting Wavefront OBJ files into a dash 3dmesh graph',
    long_description=open('README.md').read(),
    long_description_content_type='text/markdown', 
-   author='Jon',
+   author='Jon Robinson',
    author_email='jonrobinson@hotmail.com',
    py_modules=['dash-obj-in-3dmesh.wav_obj_importer', 'dash-obj-in-3dmesh.geometry_tools', 'dash-obj-in-3dmesh._config'],  #same as name
    python_requires='>=3.5',
