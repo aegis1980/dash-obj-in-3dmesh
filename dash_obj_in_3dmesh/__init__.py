@@ -1,5 +1,5 @@
 # nothing to see here 
 # except the last line, and this one
-import _config
-import wav_obj
-import geometry_tools
+from . import _config
+from . import wav_obj
+from . import geometry_tools
