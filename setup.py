@@ -38,10 +38,6 @@ setup(
     ], #external packages as dependencies
     include_package_data=True,
     classifiers=[
-        "Framework :: Dash",
-        "License :: OSI Approved :: CC Attribution 4.0 International",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
+        "Framework :: Dash"
     ]
 )
