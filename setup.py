@@ -23,9 +23,9 @@ setup(
    author='Jon Robinson',
    author_email='jonrobinson1980@gmail.com',
    py_modules=[
-       'dash_obj_in_3dmesh._config',
-       'dash_obj_in_3dmesh.wav_obj', 
-       'dash_obj_in_3dmesh.geometry_tools'
+       '_config',
+       'wav_obj', 
+       'geometry_tools'
     ],  #same as name
    python_requires='>=3.5',
    install_requires=[
