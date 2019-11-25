@@ -90,7 +90,6 @@ def create_mesh_data(component : str, path = _config.GEOMETRY_DIR):
             facecolors = obj.face_colors,
             opacity = obj.opacities[0]
         )
-        print(obj.opacities[0])
         data.append(mesh)
 
     return data
