@@ -4,7 +4,7 @@ https://packaging.python.org/guides/distributing-packages-using-setuptools/
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from os import path
 
 HERE = path.dirname(path.abspath(__file__))
@@ -21,20 +21,21 @@ def _get_long_description():
 
 setup(
     name='dash-obj-in-3dmesh',
-    version='0.1.1-dev',
+    version='0.1',
     description='Some tools for getting Wavefront OBJ files into a Plotly Dash 3dmesh graph',
     long_description=_get_long_description(),
     long_description_content_type='text/markdown', 
     author='Jon Robinson',
     author_email='jonrobinson1980@gmail.com',
     license='CC Attribution 4.0 International',
-    packages=['dash_obj_in_3dmesh'],
+    packages=find_packages(),
     python_requires='>=3.5',
     install_requires=[
         'numpy', 
         'dash',
         'multimethod'
     ], #external packages as dependencies
+    include_package_data=True,
     classifiers=[
         "Framework :: Dash",
         "License :: OSI Approved :: CC Attribution 4.0 International",
