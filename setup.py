@@ -4,7 +4,7 @@ https://packaging.python.org/guides/distributing-packages-using-setuptools/
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import find_packages,setup
+from setuptools import setup
 from os import path
 
 HERE = path.dirname(path.abspath(__file__))
@@ -28,7 +28,7 @@ setup(
     author='Jon Robinson',
     author_email='jonrobinson1980@gmail.com',
     license='CC Attribution 4.0 International',
-    packages=find_packages(),
+    packages=['dash_obj_in_3dmesh'],
     python_requires='>=3.5',
     install_requires=[
         'numpy', 
