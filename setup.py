@@ -14,22 +14,19 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-   name='dash_obj_in_3dmesh',
-   version='0.1.dev',
-   description='Some tools for getting Wavefront OBJ files into a dash 3dmesh graph',
-   long_description=open('README.md').read(),
-   long_description_content_type='text/markdown', 
-   author='Jon Robinson',
-   author_email='jonrobinson1980@gmail.com',
-   py_modules=[
-       'dash_obj_in_3dmesh._config',
-       'dash_obj_in_3dmesh.wav_obj', 
-       'dash_obj_in_3dmesh.geometry_tools'
-    ],  #same as name
-   python_requires='>=3.5',
-   install_requires=[
-       'numpy', 
-       'dash',
-       'multimethod'
+    name='dash_obj_in_3dmesh',
+    version='0.1.dev',
+    description='Some tools for getting Wavefront OBJ files into a dash 3dmesh graph',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown', 
+    author='Jon Robinson',
+    author_email='jonrobinson1980@gmail.com',
+    package_dir={'dash_obj_in_3dmesh': 'dash_obj_in_3dmesh'},
+    packages=['dash_obj_in_3dmesh'], 
+    python_requires='>=3.5',
+    install_requires=[
+        'numpy', 
+        'dash',
+        'multimethod'
     ], #external packages as dependencies
 )
