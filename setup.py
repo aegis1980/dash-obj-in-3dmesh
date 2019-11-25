@@ -21,8 +21,12 @@ setup(
    long_description=open('README.md').read(),
    long_description_content_type='text/markdown', 
    author='Jon Robinson',
-   author_email='jonrobinson@hotmail.com',
-   py_modules=['dash_obj_in_3dmesh.wav_obj_importer', 'dash_obj_in_3dmesh.geometry_tools', 'dash_obj_in_3dmesh._config'],  #same as name
+   author_email='jonrobinson1980@gmail.com',
+   py_modules=[
+       'dash_obj_in_3dmesh._config',
+       'dash_obj_in_3dmesh.wav_obj', 
+       'dash_obj_in_3dmesh.geometry_tools'
+    ],  #same as name
    python_requires='>=3.5',
    install_requires=[
        'numpy', 

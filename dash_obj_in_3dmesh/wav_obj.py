@@ -11,7 +11,6 @@ import numpy as np
 # Local packages
 import _config 
 
-
 class WavObject(metaclass=multimeta):
     """
     Parse 1 or many objects in wavefront obj file using one or other of static methof:
