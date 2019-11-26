@@ -1,6 +1,6 @@
 import pathlib
 
-DATA_PATH = pathlib.Path(__file__).parent.joinpath('data').resolve()
+DATA_PATH = pathlib.Path.cwd().joinpath('data').resolve()
 GEOMETRY_DIR = 'obj' #(in DATA_PATH)
 RESULTS_DIR = 'results' #(in DATA_PATH)
 
