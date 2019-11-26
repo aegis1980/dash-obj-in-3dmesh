@@ -13,7 +13,6 @@ from dash.exceptions import PreventUpdate
 # local modules
 import geometry_tools
 
-
 axis_template = {
     "showbackground": False,
     "visible" : False

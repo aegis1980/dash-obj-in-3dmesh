@@ -22,7 +22,7 @@ def _get_long_description():
 
 setup(
     name='dash-obj-in-3dmesh',
-    version='0.2',
+    version='0.3',
     description='Some tools for getting Wavefront OBJ files into a Plotly Dash 3dmesh graph',
     long_description=_get_long_description(),
     long_description_content_type='text/markdown', 
@@ -36,7 +36,6 @@ setup(
         'dash',
         'multimethod'
     ], #external packages as dependencies
-    include_package_data=True,
     classifiers=[
         "Framework :: Dash"
     ]

@@ -1,14 +1,14 @@
-# built-in py packages
+# built-in py modules
 from typing import List, Iterator
 
 import pathlib
 
-# 3rd party packages
+# 3rd party modules
 from multimethod import multimeta
 import numpy as np
 
 
-# Local packages
+# Local modules
 import _config 
 
 class WavObject(metaclass=multimeta):

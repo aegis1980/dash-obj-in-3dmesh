@@ -29,6 +29,7 @@
     <Compile Include="callbacks.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="__init__.py" />
     <Compile Include="geometry_tools.py">
       <SubType>Code</SubType>
     </Compile>
@@ -42,9 +43,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_config.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="__init__.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
