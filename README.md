@@ -1,22 +1,29 @@
-Import a Wavefront OBJ file into a plot.ly Dash 3dMesh graph:
+# Wavefront OBJ importer for the plotly Dash framework
 
+#### *Dash is a Python framework for building analytical web applications. This library helps you to get 3D ObJ into the framework's 3dmesh graph type*
+
+Source is here:
 ```
-pip install git+https://github.com/aegis1980/dash-obj-in-3dmesh.git
+https://github.com/aegis1980/dash-obj-in-3dmesh.git
 ```
-
-
+Also on pypi, installed using:
+```
+pip install dash-obj-in-3dmesh
+```
+---
 ### Some notes:
  
 #### File locations
-Put your wavefront obj & mtl file in 'data/obj' directory (this is the default). Alternatively pass a path to:
+Put your wavefront obj & mtl file in 'data/obj' directory in the root directory of your Dash app. Alternatively pass a path to:
 ```python
 import_geometry(obj_names : List[str], path = _config.GEOMETRY_DIR)
 ```
 #### Geometry
 * Only triangulated meshes supported (i.e 3 vertices per face). Sort this out in your modelling software (e.g. Rhino)
-* Textures, normals, groups are all ignored - only vertices, faces, materials and object names are parsed and passed to Dash graph as mesh data.
+* Textures, normals and everything else are ignored - only vertices, faces, materials, groups and object names are parsed and passed to Dash graph as mesh data. 
+* ...so to speeden things up strip all that data out of your files pre-deployment 
 #### Materials
-Only basic materials supported in mtl file:
+obj file can have an accompanying materials file, but only basic materials supported in mtl file:
 e.g:
 ```
 newmtl diffuse_Green
@@ -27,17 +34,16 @@ Tf 0.0000 0.0000 0.0000
 d 1.0000
 Ns 0.0000
 ```
-Only the value for `Kd` is used - so set this as your colour (in modelling software)
+Only the value for `Kd` is used - so set this as your colour (in modelling software).
 
 ### Code example
 
 ```python
 import dash
-from dash_obj_in_3dmesh import geometry_tools, wav_obj
+import dash_obj_in_3dmesh
 
 
 model_name = "test" #.obj & .mtl files in data/obj
-
 
 axis_template = {
     "showbackground": False,
@@ -60,13 +66,21 @@ plot_layout = {
     },
 }
 
-layout = return html.Div([dcc.Graph(
-                        id="graph",
-                        figure={
-                            "data": geometry_tools.import_geometry([model_name]),
-                            "layout": plot_layout,
-                        },
-                        config={"scrollZoom": True}, # activates wheel thingy on mouse to zoom and wotnot
-                    )])
+def layout():
+ return html.Div([dcc.Graph(
+          id="graph",
+          figure={
+              "data": geometry_tools.import_geometry([model_name]),
+              "layout": plot_layout,
+          },
+          config={"scrollZoom": True}, # activates wheel thingy on mouse to zoom and wotnot
+      )])
+      
+app = Dash()
+app.layout = layout
+
+app.run_server()
 ```
+
+
 
