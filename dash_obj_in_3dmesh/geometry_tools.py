@@ -25,7 +25,8 @@ def make_ployly_mesh3d(
     showscale=False,
     hoverinfo='none',
     hovertemplate = '',
-    customdata = None
+    customdata = None,
+    vertexcolor = []
 ):
 
     x, y, z = vertices.T
@@ -44,6 +45,7 @@ def make_ployly_mesh3d(
         flatshading = flatshading,
         hoverinfo=hoverinfo,
         hovertemplate = hovertemplate,
+        vertexcolor = vertexcolor,
         i = I,
         j = J,
         k = K,
@@ -90,7 +92,8 @@ def create_mesh_data(component : str, path = _config.GEOMETRY_DIR):
             obj.tri_faces,
             name = obj.name,
             facecolors = obj.face_colors,
-            opacity = obj.opacities[0]
+            opacity = obj.opacities[0],
+            vertexcolor = obj.vertice_colors,
         )
         data.append(mesh)
 

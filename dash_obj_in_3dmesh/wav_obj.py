@@ -28,6 +28,7 @@ class WavObject(metaclass=multimeta):
     def __init__(self):
         self.name : str = None 
         self.vertices  = []
+        self.vertice_colors = []
         self.tri_faces = []
         self.face_mtls: List(str) = []
         self.face_colors: List(List(int)) = []
@@ -60,6 +61,7 @@ class WavObject(metaclass=multimeta):
             correction = 1 for dash. 
             """
             current_obj.vertices = np.array(current_obj.vertices)
+            current_obj.vertice_colors = np.array(current_obj.vertice_colors)
             current_obj.tri_faces = [int(i) for i in current_obj.tri_faces]
             current_obj.tri_faces = np.array(list(triangulate_polygons(current_obj.tri_faces))) - (correction + index_correction- (0 if len(my_objects) == 0 else 1))
             
@@ -97,7 +99,14 @@ class WavObject(metaclass=multimeta):
                         face_mtls = []
 
                     line = line[2:].strip() # remove v and whitespace
-                    current_obj.vertices.append(list(map(float, line.split())))
+                    # extract vertice color if more than 3 values.
+                    if len(line.split()) > 3:
+                        current_obj.vertices.append(
+                            list(map(float, line.split()[:3])))
+                        current_obj.vertice_colors.append(
+                            list(map(float, line.split()[3:])))
+                    else:
+                        current_obj.vertices.append(list(map(float, line.split())))
                     prev_good_line = WavObject.VERTEX_LINE
                 elif line.startswith(WavObject.FACE_LINE):
                     line = line[len(WavObject.FACE_LINE):].strip()
