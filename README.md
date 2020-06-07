@@ -19,7 +19,7 @@ Put your wavefront obj & mtl file in 'data/obj' directory in the root directory 
 import_geometry(obj_names : List[str], path = _config.GEOMETRY_DIR)
 ```
 #### Geometry
-* Only triangulated meshes supported (i.e 3 vertices per face). Sort this out in your modelling software (e.g. Rhino)
+* **v4.0** Added support importing OBJ files with quads. Dash graph.Mesh3d can only display triangulated meshes. Imported quad are split in `mesh_tools.split_quad()` into two tris with the fold line on the quad diagonal which produces the least curvature (i.e. the widest angle between the tri normals)
 * Textures, normals and everything else are ignored - only vertices, faces, materials, groups and object names are parsed and passed to Dash graph as mesh data. 
 * ...so to speeden things up strip all that data out of your files pre-deployment 
 #### Materials

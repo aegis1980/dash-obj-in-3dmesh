@@ -22,7 +22,7 @@ def _get_long_description():
 
 setup(
     name='dash-obj-in-3dmesh',
-    version='0.3.1',
+    version='0.4.0',
     description='Some tools for getting Wavefront OBJ files into a Plotly Dash 3dmesh graph',
     long_description=_get_long_description(),
     long_description_content_type='text/markdown', 
