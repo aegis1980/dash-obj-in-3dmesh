@@ -33,8 +33,7 @@ setup(
     python_requires='>=3.5',
     install_requires=[
         'numpy', 
-        'dash',
-        'multimethod'
+        'dash'
     ], #external packages as dependencies
     classifiers=[
         "Framework :: Dash"

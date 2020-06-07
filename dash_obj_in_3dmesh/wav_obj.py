@@ -1,17 +1,15 @@
 # built-in py modules
 from typing import List, Iterator
-
-import pathlib
+import os
 
 # 3rd party modules
-from multimethod import multimeta
 import numpy as np
-
 
 # Local modules
 import _config 
+from mesh_tools import split_quad
 
-class WavObject(metaclass=multimeta):
+class WavObject():
     """
     Parse 1 or many objects in wavefront obj file using one or other of static methof:
         WavObject.read_objfile(...)
@@ -29,22 +27,20 @@ class WavObject(metaclass=multimeta):
         self.name : str = None 
         self.vertices  = []
         self.vertice_colors = []
-        self.tri_faces = []
+        self.faces = []
         self.face_mtls: List(str) = []
         self.face_colors: List(List(int)) = []
         self.opacities: List(float) = []
 
-   
-    def read_objfile(full_obj_filepath : pathlib.Path, split = True):
+    
+    @staticmethod
+    def _read_objfile(full_obj_filepath : str, split : bool = True):
         """
-        NOTE : This is a @staticmethod of WavObject, but using @staticmethod decorator 
-        seem to break multimethod
-
         Parses a wavefront obj file.
     
         Args:
-            full_obj_filepath (str) : full os-specific filepath of .obj file (e.g. monkey.obj)
-            split (bool) : if True then returns all objects in file as separate elements
+            full_obj_filepath: full os-specific filepath of .obj file (e.g. ../../monkey.obj)
+            split: if True then returns all objects in file as separate elements
         Returns: 
             my_objects : List of WavObjects
         """
@@ -60,10 +56,11 @@ class WavObject(metaclass=multimeta):
             """
             correction = 1 for dash. 
             """
+
             current_obj.vertices = np.array(current_obj.vertices)
             current_obj.vertice_colors = np.array(current_obj.vertice_colors)
-            current_obj.tri_faces = [int(i) for i in current_obj.tri_faces]
-            current_obj.tri_faces = np.array(list(triangulate_polygons(current_obj.tri_faces))) - (correction + index_correction- (0 if len(my_objects) == 0 else 1))
+            current_obj.faces = [int(i) for i in current_obj.faces]
+            current_obj.faces = np.array(list(triangulate_polygons(current_obj.faces))) - (correction + index_correction- (0 if len(my_objects) == 0 else 1))
             
             # currently we discard everything except the kd (diffuse color) 
             current_obj.face_colors = list(map(lambda x : x.kd,face_mtls))
@@ -112,9 +109,12 @@ class WavObject(metaclass=multimeta):
                     line = line[len(WavObject.FACE_LINE):].strip()
                     vtx_indices = [x.split('/')[0] for x in line.split()]
                     if len(vtx_indices) != 3:
-                        raise NotImplementedError("Currently all faces have to be triangular")
+                        # split quad face into two tris
+                        vtx_indices = split_quad(vtx_indices,current_obj.vertices)
+                        face_mtls.append(current_mtl)
+                        
                     face_mtls.append(current_mtl)
-                    current_obj.tri_faces.extend(vtx_indices)
+                    current_obj.faces.extend(vtx_indices)
                     prev_good_line = WavObject.FACE_LINE
                 elif line.startswith(WavObject.OBJECT_NAME_LINE):
                     line = line[len(WavObject.OBJECT_NAME_LINE):].strip()
@@ -122,32 +122,31 @@ class WavObject(metaclass=multimeta):
                     #todo this is a bit crude. Might not work 100% of the time. 
                 elif line.startswith(WavObject.MATERIAL_LIB_LINE):
                     mtl_file = line[len(WavObject.MATERIAL_LIB_LINE):].strip() # remove mtllib and whitespace
-                    full_mtl_filepath = full_obj_filepath.parents[0].joinpath(mtl_file)
+                    dirname = os.path.dirname(full_obj_filepath)
+                    full_mtl_filepath = os.path.join(dirname,mtl_file)
                     obj_mtls.update(_BasicWavMaterial.read_mtlfile(full_mtl_filepath))
                 elif line.startswith(WavObject.USE_MATERIAL_LINE):
                     mtl_name = line[len(WavObject.USE_MATERIAL_LINE):].strip() # remove usemtl and whitespace
                     if mtl_name in obj_mtls:
                         current_mtl = obj_mtls[mtl_name]
 
-
-
         process_faces(current_obj,face_mtls, index_correction) # add last object (or only object!)
         return my_objects
 
 
-    def read_objfile(component_name : str, sub_dir : str , split = True):
+    @staticmethod
+    def read_objfile(component_name : str, obj_dir : str = _config.GEOMETRY_DIR, split = True):
         """
-        NOTE : This is a @staticmethod of WavObject, but using @staticmethod decorator 
-        seem to break multimethod
+        public helper function.
+        forms correct path and passes to _read_objfile()
 
-        Overloaded method for loading obj files.
+        Args:
+            component_name : obj file name without extension (without .obj or .mtl)
+
         """
-        if sub_dir is not None:
-            full_filepath = _config.DATA_PATH.joinpath(sub_dir, component_name + ".obj")
-        else:
-            full_filepath = _config.DATA_PATH.joinpath(component_name + ".obj")
+        full_filepath = os.path.join(_config.DATA_PATH,obj_dir,component_name + ".obj")
 
-        return WavObject.read_objfile(full_filepath,split)
+        return WavObject._read_objfile(full_filepath,split)
 
 
 
@@ -189,7 +188,7 @@ class _BasicWavMaterial:
         return self.__str__()
 
     @staticmethod
-    def read_mtlfile(full_mtl_filepath : pathlib.Path):
+    def read_mtlfile(full_mtl_filepath : str):
 
 
         def rgb(line : str):

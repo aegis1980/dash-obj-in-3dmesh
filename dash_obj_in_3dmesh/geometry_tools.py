@@ -70,7 +70,7 @@ def make_ployly_mesh3d(
 def import_geometry(obj_names : List[str], path = _config.GEOMETRY_DIR):
     c = []
     for component in obj_names:
-        traces = create_mesh_data(component)
+        traces = create_mesh_data(component,path)
         c.extend(traces)
     return c
 
@@ -84,12 +84,9 @@ def create_mesh_data(component : str, path = _config.GEOMETRY_DIR):
     wav_objs = wav_obj.WavObject.read_objfile(component, path, split = False)
 
     for i, obj in enumerate(wav_objs):
-        vertices = obj.vertices
-        faces = obj.tri_faces
-        facecolors = obj.face_mtls
         mesh = make_ployly_mesh3d(
             obj.vertices,
-            obj.tri_faces,
+            obj.faces,
             name = obj.name,
             facecolors = obj.face_colors,
             opacity = obj.opacities[0],
@@ -98,4 +95,6 @@ def create_mesh_data(component : str, path = _config.GEOMETRY_DIR):
         data.append(mesh)
 
     return data
+
+
 
